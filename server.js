@@ -40,8 +40,6 @@ db.once('open', function() {
   console.log('Mongoose connection successful.');
 });
 
-var Article = require('./models/Article.js');
-
 app.post('/submit', function(req, res) {
 
   var content = new Article(req.body);
