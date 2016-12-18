@@ -1,10 +1,10 @@
 var React = require("react");
 
 var Results = require("./Results");
-var Save = require("./Save");
+var Form = require("./Form");
 
 // Helper Function
-var helper from "./utils/helper";
+var helper = require("./utils/helper");
 
 class Main extends React.Component {
 
