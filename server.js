@@ -40,31 +40,31 @@ db.once('open', function() {
   console.log('Mongoose connection successful.');
 });
 
-app.post('/submit', function(req, res) {
+// app.post('/submit', function(req, res) {
 
-  var content = new Article(req.body);
+//   var content = new Article(req.body);
  
-  content.save(req.body, function(err, saved) {
-    if (err) {
-      console.log('error saving to mongo ',err);
-    } else {
-      console.log('saved data',saved);
-      res.send(saved);
-    }
-  });
+//   content.save(req.body, function(err, saved) {
+//     if (err) {
+//       console.log('error saving to mongo ',err);
+//     } else {
+//       console.log('saved data',saved);
+//       res.send(saved);
+//     }
+//   });
 
-});
+// });
 
-app.get('/all', function(req, res) {
+// app.get('/all', function(req, res) {
  
-  Article.find({}, function(err, found) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(found);
-    }
-  });
-});
+//   Article.find({}, function(err, found) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.json(found);
+//     }
+//   });
+// });
 
 
 app.get('/', function(req, res) {
