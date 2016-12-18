@@ -27,7 +27,7 @@ app.use(express.static("./public"));
 // Database configuration with mongoose
 var dbURI = 'mongodb://localhost/nytreact';
 if (process.env.NODE_ENV === 'production') {
-    dbURI= "";
+    dbURI= "mongodb://heroku_8z67v3cc:vjp4oosi2273o4tb7g46f0c17f@ds031842.mlab.com:31842/heroku_8z67v3cc";
 }
 mongoose.connect(dbURI);
 var db = mongoose.connection;
