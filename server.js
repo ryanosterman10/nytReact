@@ -1,36 +1,46 @@
+// Dependencies
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
+// Requiring our Comment and Article models
+var Article = require("./models/Article.js");
 
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-app.use(express.static('public'));
+// Mongoose mpromise deprecated - use bluebird promises
+var Promise = require("bluebird");
 
-var PORT = process.env.PORT || 3000; 
+mongoose.Promise = Promise;
 
+// Initialize Express
+var app = express();
+var PORT = process.env.PORT || 3000;
 
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-},
-else {
-  mongoose.connect('mongodb://localhost/nytimes');
-};
+app.use(logger("dev"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+app.use(express.static("./public"));
+
+// Database configuration with mongoose
+var dbURI = 'mongodb://localhost/nytreact';
+if (process.env.NODE_ENV === 'production') {
+    dbURI= "";
+}
+mongoose.connect(dbURI);
 var db = mongoose.connection;
 
 db.on('error', function(err) {
   console.log('Mongoose Error: ', err);
 });
+
 db.once('open', function() {
   console.log('Mongoose connection successful.');
 });
 
-var Article = require('./article.js');
+var Article = require('./models/Article.js');
 
 app.post('/submit', function(req, res) {
 
